@@ -81,7 +81,7 @@
                 $security_question3 = $_POST["security_question3"];
 
                 // Prepare SQL statement to retrieve user data based on username and security answers
-                $stmt = $conn->prepare("SELECT * FROM Users WHERE username = ? AND security_question1 = ? AND security_question2 = ? AND security_question3 = ?");
+                $stmt = $conn->prepare("SELECT * FROM Personnel WHERE username = ? AND security_question1 = ? AND security_question2 = ? AND security_question3 = ?");
                 $stmt->bind_param("ssss", $username, $security_question1, $security_question2, $security_question3);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -90,7 +90,7 @@
                 if ($result->num_rows > 0) {
                     // Redirect to reset password page
                     $token = bin2hex(random_bytes(32));
-                    $stmt = $conn->prepare("UPDATE Users SET reset_token = ? WHERE username = ?");
+                    $stmt = $conn->prepare("UPDATE Personnel SET reset_token = ? WHERE username = ?");
                     $stmt->bind_param("ss", $token, $username);
                     $stmt->execute();
                     $stmt->close();

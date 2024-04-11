@@ -75,7 +75,7 @@
             $token = $_GET['token'];
 
             // Verify the token against the database
-            $stmt = $conn->prepare("SELECT reset_token FROM Users WHERE username = ?");
+            $stmt = $conn->prepare("SELECT reset_token FROM Personnel WHERE username = ?");
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $stmt->store_result();
@@ -93,7 +93,7 @@
                             // Hash the new password
                             $hashed_password = password_hash($_POST["new_password"], PASSWORD_DEFAULT);
                             // Update the password in the database
-                            $sql = "UPDATE Users SET password = ? WHERE username = ?";
+                            $sql = "UPDATE Personnel SET Password = ? WHERE username = ?";
                             $stmt = $conn->prepare($sql);
                             $stmt->bind_param("ss", $hashed_password, $username);
                             if ($stmt->execute()) {

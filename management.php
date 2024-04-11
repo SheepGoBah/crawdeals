@@ -63,7 +63,7 @@ if(isset($_SESSION['username'])) {
     $loggedInUsername = $_SESSION['username'];
 
     // Query to fetch user data from the database
-    $sql = "SELECT isOwner, isManager FROM users WHERE username = ?";
+    $sql = "SELECT isOwner, isManager FROM Personnel WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $loggedInUsername);
     $stmt->execute();
@@ -93,21 +93,21 @@ else {
 
 // Update user role
 if (isset($_POST['update_role'])) {
-    $userId = $_POST['user_id'];
+    $userId = $_POST['Personnel_id'];
     $newRole = $_POST['new_role'];
 
     // Update user role in the database
-    $updateSql = "UPDATE users SET isOwner = 0, isManager = 0, isEmployee = 0 WHERE user_id = ?";
+    $updateSql = "UPDATE Personnel SET isOwner = 0, isManager = 0, isEmployee = 0 WHERE Personnel_id = ?";
     $updateStmt = $conn->prepare($updateSql);
     $updateStmt->bind_param("i", $userId);
     $updateStmt->execute();
 
     if ($newRole == 'Owner') {
-        $updateSql = "UPDATE users SET isOwner = 1 WHERE user_id = ?";
+        $updateSql = "UPDATE Personnel SET isOwner = 1 WHERE Personnel_id = ?";
     } elseif ($newRole == 'Manager') {
-        $updateSql = "UPDATE users SET isManager = 1 WHERE user_id = ?";
+        $updateSql = "UPDATE Personnel SET isManager = 1 WHERE Personnel_id = ?";
     } elseif ($newRole == 'Employee') {
-        $updateSql = "UPDATE users SET isEmployee = 1 WHERE user_id = ?";
+        $updateSql = "UPDATE Personnel SET isEmployee = 1 WHERE Personnel_id = ?";
     }
     
     $updateStmt = $conn->prepare($updateSql);
@@ -120,19 +120,19 @@ if (isset($_POST['update_role'])) {
 <h2>User Management System</h2>
 
 <?php
-// Fetch all users from the database
-$userSql = "SELECT user_id, username, isOwner, isManager, isEmployee FROM users";
-$userResult = $conn->query($userSql);
+// Fetch all Personnel from the database
+$Personnelsql = "SELECT Personnel_id, username, isOwner, isManager, isEmployee FROM Personnel";
+$userResult = $conn->query($Personnelsql);
 
 if ($userResult->num_rows > 0) {
     // Display table header
     echo "<table>";
     echo "<tr><th>ID</th><th>Username</th><th>Role</th><th>Action</th></tr>";
 
-    // Display users and their roles
+    // Display Personnel and their roles
     while($row = $userResult->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["user_id"] . "</td>";
+        echo "<td>" . $row["Personnel_id"] . "</td>";
         echo "<td>" . $row["username"] . "</td>";
         echo "<td>";
         if ($row["isOwner"] == 1) {
@@ -150,7 +150,7 @@ if ($userResult->num_rows > 0) {
         // Display update role form for managers
         if ($isManager && $row["isOwner"] != 1) { // Check if the user is a manager and the role is not Owner
             echo "<form action='management.php' method='post'>";
-            echo "<input type='hidden' name='user_id' value='" . $row["user_id"] . "'>";
+            echo "<input type='hidden' name='Personnel_id' value='" . $row["Personnel_id"] . "'>";
             echo "<select name='new_role'>";
             echo "<option value='Inactive'>Inactive</option>";
             echo "<option value='Employee'>Employee</option>";
@@ -162,7 +162,7 @@ if ($userResult->num_rows > 0) {
         // Display update role form for owners
         if ($isOwner) {
             echo "<form action='management.php' method='post'>";
-            echo "<input type='hidden' name='user_id' value='" . $row["user_id"] . "'>";
+            echo "<input type='hidden' name='Personnel_id' value='" . $row["Personnel_id"] . "'>";
             echo "<select name='new_role'>";
             echo "<option value='Inactive'>Inactive</option>";
             echo "<option value='Employee'>Employee</option>";
@@ -178,7 +178,7 @@ if ($userResult->num_rows > 0) {
     }
     echo "</table>";
 } else {
-    echo "No users found.";
+    echo "No Personnel found.";
 }
 ?>
 

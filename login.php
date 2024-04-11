@@ -81,22 +81,21 @@
             if (!empty($_POST["username"]) && !empty($_POST["password"])) {
                 // Sanitize user input
                 $username = $_POST["username"];
-                $password = $_POST["password"];
+                $user_password = $_POST["password"]; // Use a different variable name
 
                 // Prepare SQL statement to retrieve user data based on username
-                $stmt = $conn->prepare("SELECT * FROM Users WHERE username = ?");
+                $stmt = $conn->prepare("SELECT * FROM Personnel WHERE Username = ?");
                 $stmt->bind_param("s", $username);
                 $stmt->execute();
                 $result = $stmt->get_result();
-
                 // Check if user exists
                 if ($result->num_rows > 0) {
                     // Fetch user data
                     $row = $result->fetch_assoc();
-                    $hashed_password = $row["password"];
+                    $hashed_password = $row["Password"];
 
                     // Verify password
-                    if (password_verify($password, $hashed_password)) {
+                    if (password_verify($user_password, $hashed_password)) {
                         session_start();
                         // Assuming $username is set after successful login
                         $_SESSION['username'] = $username; // Store username in session

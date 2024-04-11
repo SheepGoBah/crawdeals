@@ -23,7 +23,7 @@ if(isset($_SESSION['username'])) {
     $loggedInUsername = $_SESSION['username'];
 
     // Query to fetch user data from the database
-    $sql = "SELECT isOwner, isManager, isEmployee, isAdmin FROM users WHERE username = ?";
+    $sql = "SELECT isOwner, isManager, isEmployee, isAdmin FROM Personnel WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $loggedInUsername);
     $stmt->execute();
@@ -126,7 +126,7 @@ $_SESSION['last_activity'] = time();
     <ul>
         <li><a href="pos.php">Point of Sale</a></li>
         <?php if ($isOwner || $isManager) { ?>
-            <li><a href="management.php">Manage Users</a></li>
+            <li><a href="management.php">Manage Personnel</a></li>
             <li><a href="inventory.php">Manage Inventory</a></li>
         <?php } ?>
         <?php if ($isOwner || $isAdmin) { ?>

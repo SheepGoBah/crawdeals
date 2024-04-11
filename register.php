@@ -98,7 +98,7 @@
                     $error_message = "Password and confirm password do not match.";
                 } else {
                     // Check if username already exists in the database
-                    $sql = "SELECT * FROM Users WHERE username = '$username'";
+                    $sql = "SELECT * FROM Personnel WHERE username = '$username'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         $error_message = "Username already exists. Please choose a different username.";
@@ -107,7 +107,7 @@
                         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
                         // Insert user data into the database
-                        $sql = "INSERT INTO Users (username, password, security_question1, security_question2, security_question3) VALUES ('$username', '$hashed_password', '$security_question1', '$security_question2', '$security_question3')";
+                        $sql = "INSERT INTO Personnel (username, password, security_question1, security_question2, security_question3) VALUES ('$username', '$hashed_password', '$security_question1', '$security_question2', '$security_question3')";
                         if ($conn->query($sql) === TRUE) {
                             // Redirect user to login page after successful registration
                             header("Location: login.php");

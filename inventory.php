@@ -46,7 +46,7 @@ include 'header.php';
 
         // Check user's role
         $username = $_SESSION['username']; // Fetch the username of the currently logged in user
-        $sql = "SELECT isOwner, isEmployee, isManager, isAdmin FROM Users WHERE username = ?";
+        $sql = "SELECT isOwner, isEmployee, isManager, isAdmin FROM Personnel WHERE username = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $username);
         $stmt->execute();
