@@ -1,18 +1,20 @@
-<?php
-include 'header.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
+    <title>User Management - CrawDeals</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
         }
         table {
             width: 80%;
@@ -31,13 +33,28 @@ include 'header.php';
         form {
             display: inline;
         }
-        h2{
+        h2 {
+            font-size: 28px;
+            color: #5c677d;
             text-align: center;
+        }
+        input[type="submit"], select {
+            padding: 8px;
+            margin-top: 5px;
+            background-color: #4a90e2;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #357abd;
         }
     </style>
 </head>
 <body>
-
+<?php include 'header.php'; ?>
+<h2>User Management System</h2>
 <?php
 // Start or resume session
 if (!isset($_SESSION)) {

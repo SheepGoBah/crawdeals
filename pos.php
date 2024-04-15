@@ -1,6 +1,3 @@
-<?php
-include 'header.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,32 +6,37 @@ include 'header.php';
     <title>Point of Sale - CrawDeals</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        p {
-            font-size: 18px;
-            color: #666;
-        }
-        h2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             text-align: center;
         }
-        input[name='register_new_customer'] {
-            margin-left: 150px;
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 28px;
+            color: #5c677d;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            color: #5c677d;
         }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
         th, td {
             padding: 8px;
@@ -43,13 +45,27 @@ include 'header.php';
         }
         th {
             background-color: #f2f2f2;
+            color: #333;
         }
-    </style>   
+        input[type="submit"], input[type="button"], select {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4a90e2;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #357abd;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <?php include 'header.php'; ?>
+        <h2>Point of Sale</h2>
         <?php
-        echo "<h2>Point of Sale</h2>";
         // Database connection parameters and user role checking
         $servername = "localhost";
         $username = "root";

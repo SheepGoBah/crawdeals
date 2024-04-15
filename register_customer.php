@@ -1,6 +1,3 @@
-<?php
-include 'header.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,35 +6,57 @@ include 'header.php';
     <title>Customer Registration - CrawDeals</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        p {
-            font-size: 18px;
-            color: #666;
-        }
-        h2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             text-align: center;
         }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 28px;
+            color: #5c677d;
+            margin-bottom: 20px;
+        }
         label {
-            display: inline-block;
-            width: 150px; /* Set the width to 100 pixels */
+            display: block;
+            margin-top: 10px;
+            color: #5c677d;
+            font-size: 16px;
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #4a90e2;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #357abd;
         }
     </style>     
 </head>
 <body>
     <div class="container">
         <?php
+        include 'header.php';
         echo "<h2>Register New Customer</h2>";
         // Database connection parameters and user role checking
         $servername = "localhost";
@@ -76,37 +95,23 @@ include 'header.php';
         }
 
         // Display form to register a new customer
-        echo "<div>";
         echo "<form action='' method='post'>";
         echo "<label for='customer_name'>Customer Name:</label>";
-        echo "<input type='text' name='customer_name' required><br>";
+        echo "<input type='text' id='customer_name' name='customer_name' required>";
         echo "<label for='customer_phone'>Customer Phone:</label>";
-        echo "<input type='text' name='customer_phone' required><br>";
+        echo "<input type='text' id='customer_phone' name='customer_phone' required>";
         echo "<label for='customer_city'>City:</label>";
-        echo "<input type='text' name='customer_city' required><br>";
+        echo "<input type='text' id='customer_city' name='customer_city' required>";
         echo "<label for='customer_state'>State:</label>";
-        echo "<input type='text' name='customer_state' required><br>";
+        echo "<input type='text' id='customer_state' name='customer_state' required>";
         echo "<label for='customer_street'>Street:</label>";
-        echo "<input type='text' name='customer_street' required><br>";
+        echo "<input type='text' id='customer_street' name='customer_street' required>";
         echo "<label for='customer_postal'>Postal Code:</label>";
-        echo "<input type='text' name='customer_postal' required><br><br>";
+        echo "<input type='text' id='customer_postal' name='customer_postal' required>";
+        echo "<br><br>";
         echo "<input type='submit' name='submit_new_customer' value='Register Customer'>";
         echo "</form>";
         echo "</div>";
-
-
-
-
-
-        // Check user's role
-        $username = $_SESSION['username']; // Fetch the username of the currently logged in user
-        $sql = "SELECT isOwner, isEmployee, isManager, isAdmin FROM Personnel WHERE Username = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->store_result();
-
-
         ?>
     </div>
 </body>
